@@ -4,7 +4,7 @@
 <style lang="scss" scoped>
 .footer-container {
   text-align: center;
-  line-height: 70px;
+  line-height: 40px;
   color: var(--txt-gray);
 }
 </style>

@@ -5,7 +5,9 @@
         <SiderBar />
       </el-aside>
       <el-container>
-        <Heador />
+        <el-header>
+          <Heador />
+        </el-header>
         <el-main>
           <AppMain />
         </el-main>
@@ -34,8 +36,14 @@ export default {
   .el-container {
     height: 100%;
   }
+  .el-header {
+    padding: 0;
+  }
   .el-main {
     height: calc(100% - 70px);
+  }
+  .el-footer {
+    height: 40px !important;
   }
 }
 </style>
