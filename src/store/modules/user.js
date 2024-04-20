@@ -48,7 +48,14 @@ export default {
       const res = await fetch("http://localhost:3000/admin_permission");
       const permissionLists = await res.json();
     },
-    resetToken() {},
+    // remove token
+    resetToken({ commit }) {
+      return new Promise((resolve) => {
+        commit("REMOVE_TOKEN");
+        commit("SET_ROLES", []);
+        resolve();
+      });
+    },
   },
 };
 /**
