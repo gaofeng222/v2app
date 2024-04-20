@@ -5,12 +5,15 @@
     background-color="#03034d"
     text-color="#fff"
     active-text-color="#ff0"
-  ></el-menu>
+  >
+    <Menu></Menu>
+  </el-menu>
 </template>
 <script>
 import { mapGetters } from "vuex";
-
+import Menu from "./menu";
 export default {
+  components: { Menu },
   computed: {
     ...mapGetters(["isCollapse"]),
   },
