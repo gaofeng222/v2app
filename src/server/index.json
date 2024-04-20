@@ -12,8 +12,11 @@
     { "id": "1", "text": "a comment about post 1", "postId": "1" },
     { "id": "2", "text": "another comment about post 1", "postId": "1" }
   ],
-  "profile": {
-    "name": "typicode"
+  "info": {
+    "name": "admin",
+    "roles":["admin","test"],
+    "avatar":"",
+    "introduction":"I am an admin of this sys."
   },
   "admin_permission":{
     "code":0,

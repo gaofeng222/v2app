@@ -7,7 +7,7 @@ import Forbbiden from "@/views/errorPage/403.vue";
 import NotFound from "@/views/errorPage/404.vue";
 
 const Order = () => import("@/views/order-manage");
-const Orderlist = () => import("@/views/order-manage/order-list");
+const Orderlist = () => import("@/views/order-manage/order-list/index.vue");
 const ProductManage = () => import("@/views/order-manage/product-manage");
 const ProductionList = () =>
   import("@/views/order-manage/product-manage/production-list");
@@ -23,14 +23,6 @@ const GoodsClassify = () => import("@/views/goods-manage/goods-classify");
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: "/login",
-    name: "Login",
-    component: LoginView,
-  },
-];
-
 /**
  * 根据用户的权限不同，所看到的页面和可操作性不同
  * admin -> 所有的页面
@@ -38,14 +30,22 @@ const routes = [
  * svip -> 更多的vip权限
  */
 
-export const CustomRoutes = [
+export const constantRoutes = [
+  {
+    path: "/login",
+    name: "Login",
+    component: LoginView,
+    hidden: true,
+    meta: {
+      name: "登录页",
+    },
+  },
   {
     path: "/",
     component: Layout,
     name: "container",
     redirect: "/home",
     meta: {
-      requiredAuth: true,
       name: "首页",
     },
     children: [
@@ -60,24 +60,19 @@ export const CustomRoutes = [
       },
     ],
   },
-  {
-    path: "/403",
-    component: Forbbiden,
-  },
-  {
-    path: "*",
-    component: NotFound,
-  },
 ];
 
 export const dynamicRoutes = [
   {
     path: "/order",
-    component: Order,
+    component: Layout,
     name: "order-manage",
+    // redirect: { name: "list" },
+    redirect: "/order/list",
     meta: {
       name: "订单管理",
       icon: "icon-email",
+      // roles: ["admin", "editor"], // you can set roles in root nav
     },
     children: [
       {
@@ -87,6 +82,7 @@ export const dynamicRoutes = [
         meta: {
           name: "订单列表",
           icon: "icon-quit",
+          roles: ["admin"], // or you can only set roles in sub nav
         },
       },
       {
@@ -130,12 +126,13 @@ export const dynamicRoutes = [
     ],
   },
   {
-    path: "goods",
-    component: Goods,
+    path: "/goods",
+    component: Layout,
     meta: {
       name: "产品管理",
       icon: "icon-order-manage",
     },
+    redirect: "/goods/list",
     children: [
       {
         path: "list",
@@ -162,7 +159,7 @@ export const dynamicRoutes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
+  routes: constantRoutes,
 });
 
 export default router;
