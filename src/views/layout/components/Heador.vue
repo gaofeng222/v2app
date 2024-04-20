@@ -1,7 +1,10 @@
 <template>
   <div class="g-header">
     <div class="header-left">
-      <i class="el-icon-s-unfold" />
+      <div @click="toggleHandler">
+        <i class="el-icon-s-unfold" v-if="isCollapse" />
+        <i class="el-icon-s-fold" v-else />
+      </div>
     </div>
     <div class="header-right">
       <el-avatar :src="avatarUrl"></el-avatar>
@@ -19,7 +22,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -27,9 +30,13 @@ export default {
         "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
     };
   },
+  computed: {
+    ...mapGetters(["isCollapse"]),
+  },
   methods: {
     ...mapActions({
       logoutHandle: "user/logoutHandle",
+      toggleSiderBar: "setting/toggleSiderBar",
     }),
     async handlerClick(type) {
       if (type === "logout") {
@@ -40,6 +47,9 @@ export default {
           location.reload();
         }
       }
+    },
+    toggleHandler() {
+      this.toggleSiderBar();
     },
   },
 };

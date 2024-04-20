@@ -1,9 +1,9 @@
 <template>
   <el-row align="center" type="flex">
-    <el-col class="login-left" :span="12" align="center" justify="center">
+    <el-col class="hidden-sm-and-down login-left" :md="12" align="center" justify="center">
       <div class="login-logo"></div>
     </el-col>
-    <el-col class="login-right" :span="12">
+    <el-col class="login-right" :md="12" :sm="24">
       <h2>火星计划CMS后台管理系统</h2>
       <div class="login-right--container">
         <h3>登录</h3>
@@ -86,7 +86,7 @@ export default {
   background: #fff;
   &--container {
     background: #fff;
-    width: 600px;
+    width: 30rem;
     min-height: 400px;
     padding: 20px;
     box-shadow: 2px 2px 50px #ccc;

@@ -1,6 +1,7 @@
 import router from "./index";
 import store from "@/store";
 import NProgress from "nprogress";
+import "nprogress/nprogress.css"; // progress bar style
 import Forbbiden from "@/views/errorPage/403.vue";
 import NotFound from "@/views/errorPage/404.vue";
 import Message from "element-ui";
@@ -17,7 +18,6 @@ router.beforeEach(async (to, from, next) => {
     } else {
       //获取用户信息
       const hasRoles = store.getters.roles && store.getters.roles.length > 0;
-      console.log("🚀 ~ router.beforeEach ~ store:", store);
       if (hasRoles) {
         next();
         NProgress.done();

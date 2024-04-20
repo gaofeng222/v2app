@@ -1,26 +1,30 @@
 <template>
   <div class="app-wrapper">
     <el-container>
-      <el-aside width="200px">左边导航</el-aside>
+      <el-aside :width="isCollapse ? '200px':'60px'">
+        <SiderBar />
+      </el-aside>
       <el-container>
-        <el-header>
-          <Heador />
-        </el-header>
+        <Heador />
         <el-main>
           <AppMain />
         </el-main>
-        <el-footer>Footer</el-footer>
+        <el-footer>
+          <Footer />
+        </el-footer>
       </el-container>
     </el-container>
   </div>
 </template>
 <script>
-import { AppMain, Heador } from "./components";
+import { AppMain, Heador, Footer, SiderBar } from "./components";
+import { mapGetters } from "vuex";
 export default {
-  components: { AppMain, Heador },
+  components: { AppMain, Heador, Footer, SiderBar },
   data() {
     return {};
   },
+  computed: { ...mapGetters(["isCollapse"]) },
 };
 </script>
 
