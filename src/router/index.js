@@ -5,7 +5,8 @@ import Home from '@/views/home'
 import Layout from '@/views/layout'
 import Forbbiden from '@/views/errorPage/403.vue'
 import NotFound from '@/views/errorPage/404.vue'
-
+import Vue2FunctionalComp from './vue2-function.js'
+Vue.use(VueRouter)
 const Order = () => import('@/views/order-manage')
 const Orderlist = () => import('@/views/order-manage/order-list/index.vue')
 const ProductManage = () => import('@/views/order-manage/product-manage')
@@ -21,7 +22,7 @@ const Goods = () => import('@/views/goods-manage')
 const GoodsList = () => import('@/views/goods-manage/goods-list')
 const GoodsClassify = () => import('@/views/goods-manage/goods-classify')
 
-Vue.use(VueRouter)
+//vue2页面测试
 
 /**
  * 根据用户的权限不同，所看到的页面和可操作性不同
@@ -160,7 +161,8 @@ export const dynamicRoutes = [
         children: []
       }
     ]
-  }
+  },
+  Vue2FunctionalComp
 ]
 
 const router = new VueRouter({

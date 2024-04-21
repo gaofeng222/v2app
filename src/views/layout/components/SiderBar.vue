@@ -9,8 +9,8 @@
         :collapse="isCollapse"
         :text-color="variables.menuText"
         :active-text-color="variables.menuActiveText"
-        :unique-opened="false"
-        :collapse-transition="false"
+        :unique-opened="true"
+        :collapse-transition="true"
         mode="vertical"
       >
         <Menu
@@ -35,7 +35,6 @@ export default {
     activeMenus() {
       const route = this.$route
       const { meta, path } = route
-      console.log('🚀 ~ activeMenus ~ route:', route)
       if (meta.activeMenu) {
         return meta.activeMenu
       }

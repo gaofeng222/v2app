@@ -4,20 +4,25 @@
       enter-active-class="animate__animated animate__backInRight"
       leave-active-class="animate__animated animate__backOutLeft"
     >
-      <router-view :key="key" />
+      <keep-alive :include="cachedViews">
+        <router-view :key="key" />
+      </keep-alive>
     </transition>
   </div>
 </template>
 
 <script>
 export default {
-  name: "AppMain",
+  name: 'AppMain',
   computed: {
     key() {
-      return this.$route.path;
+      return this.$route.path
     },
-  },
-};
+    cachedViews() {
+      return ['KeepAliveTest']
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .app-main {
