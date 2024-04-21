@@ -6,6 +6,7 @@ import Layout from '@/views/layout'
 import Forbbiden from '@/views/errorPage/403.vue'
 import NotFound from '@/views/errorPage/404.vue'
 import Vue2FunctionalComp from './vue2-function.js'
+import AuthTestPage from './auth.js'
 Vue.use(VueRouter)
 const Order = () => import('@/views/order-manage')
 const Orderlist = () => import('@/views/order-manage/order-list/index.vue')
@@ -162,14 +163,24 @@ export const dynamicRoutes = [
       }
     ]
   },
-  Vue2FunctionalComp
+  Vue2FunctionalComp,
+  AuthTestPage
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: constantRoutes
-})
+const createRouter = () =>
+  new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: constantRoutes
+  })
+
+const router = createRouter()
+
+//重置所有的路由
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
 
 export default router
 // const originalPush = VueRouter.prototype.push;
