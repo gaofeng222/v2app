@@ -1,27 +1,40 @@
 <script>
 export default {
-  name: "MenuItem",
+  name: 'MenuItem',
   functional: true,
   props: {
     icon: {
       type: String,
-      default: "",
+      default: ''
     },
     title: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
   render(h, context) {
-    console.log("🚀 ~ render ~ context:", context);
-    const { icon, title } = context;
-    const nodes = [];
+    console.log('🚀 ~ render ~ context:', context)
+    const { icon, title } = context.props
+    const nodes = []
     if (icon) {
-      if (icon.includes("el-icon")) {
-        nodes.push(<i class=""></i>);
+      if (icon.includes('el-icon')) {
+        nodes.push(<i class={[icon, 'sub-el-icon']}></i>)
+      } else {
+        nodes.push(<svg-icon icon-class={icon} />)
       }
     }
-    return nodes;
-  },
-};
+    if (title) {
+      nodes.push(<span slot='title'>{title}</span>)
+    }
+    return nodes
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+.sub-el-icon {
+  color: currentColor;
+  width: 1em;
+  height: 1em;
+}
+</style>

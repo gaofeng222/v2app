@@ -1,27 +1,27 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import LoginView from "@/views/login";
-import Home from "@/views/home";
-import Layout from "@/views/layout";
-import Forbbiden from "@/views/errorPage/403.vue";
-import NotFound from "@/views/errorPage/404.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import LoginView from '@/views/login'
+import Home from '@/views/home'
+import Layout from '@/views/layout'
+import Forbbiden from '@/views/errorPage/403.vue'
+import NotFound from '@/views/errorPage/404.vue'
 
-const Order = () => import("@/views/order-manage");
-const Orderlist = () => import("@/views/order-manage/order-list/index.vue");
-const ProductManage = () => import("@/views/order-manage/product-manage");
+const Order = () => import('@/views/order-manage')
+const Orderlist = () => import('@/views/order-manage/order-list/index.vue')
+const ProductManage = () => import('@/views/order-manage/product-manage')
 const ProductionList = () =>
-  import("@/views/order-manage/product-manage/production-list");
+  import('@/views/order-manage/product-manage/production-list')
 const ReviewManage = () =>
-  import("@/views/order-manage/product-manage/review-manage");
+  import('@/views/order-manage/product-manage/review-manage')
 
 const ReturnGoods = () =>
-  import("@/views/order-manage/product-manage/return-goods");
+  import('@/views/order-manage/product-manage/return-goods')
 /* 产品管理 */
-const Goods = () => import("@/views/goods-manage");
-const GoodsList = () => import("@/views/goods-manage/goods-list");
-const GoodsClassify = () => import("@/views/goods-manage/goods-classify");
+const Goods = () => import('@/views/goods-manage')
+const GoodsList = () => import('@/views/goods-manage/goods-list')
+const GoodsClassify = () => import('@/views/goods-manage/goods-classify')
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 /**
  * 根据用户的权限不同，所看到的页面和可操作性不同
@@ -32,143 +32,150 @@ Vue.use(VueRouter);
 
 export const constantRoutes = [
   {
-    path: "/login",
-    name: "Login",
+    path: '/login',
+    name: 'Login',
     component: LoginView,
     hidden: true,
     meta: {
-      name: "登录页",
-    },
+      title: '登录页'
+    }
   },
   {
-    path: "/",
+    path: '/',
     component: Layout,
-    name: "container",
-    redirect: "/home",
+    name: 'container',
+    redirect: '/home',
     meta: {
-      name: "首页",
+      title: '首页'
     },
     children: [
       {
-        path: "home",
+        path: 'home',
         component: Home,
-        name: "home",
+        name: 'home',
         meta: {
-          name: "首页",
-          icon: "icon-name",
-        },
-      },
-    ],
-  },
-];
+          title: '首页',
+          icon: 'dashboard'
+        }
+      }
+    ]
+  }
+]
 
 export const dynamicRoutes = [
   {
-    path: "/order",
+    path: '/order',
     component: Layout,
-    name: "order-manage",
-    // redirect: { name: "list" },
-    redirect: "/order/list",
+    name: 'order-manage',
+    redirect: '/order/list',
+    alwaysShow: true,
     meta: {
-      name: "订单管理",
-      icon: "icon-email",
+      title: '订单管理',
+      icon: 'el-icon-odometer'
       // roles: ["admin", "editor"], // you can set roles in root nav
     },
     children: [
       {
-        path: "list",
+        path: 'list',
         component: Orderlist,
-        name: "order-list",
+        name: 'order-list',
         meta: {
-          name: "订单列表",
-          icon: "icon-quit",
-          roles: ["admin"], // or you can only set roles in sub nav
+          title: '订单列表',
+          icon: 'el-icon-set-up',
+          roles: ['admin'] // or you can only set roles in sub nav
         },
+        children: []
       },
       {
-        path: "product",
+        path: 'product',
         component: ProductManage,
-        name: "product-manage",
+        name: 'product-manage',
+        // hidden: true,
         meta: {
-          name: "生产管理",
-          icon: "icon-service",
+          title: '生产管理',
+          icon: 'icon-service'
         },
         children: [
           {
-            path: "list",
+            path: 'list',
+            hidden: true,
             meta: {
-              name: "生产列表",
-              icon: "icon-nav",
+              title: '生产列表',
+              icon: 'icon-nav'
             },
             component: ProductionList,
-            name: "product-list",
+            name: 'product-list'
           },
           {
-            path: "review",
+            path: 'review',
             meta: {
-              name: "审核管理",
-              icon: "icon-nav",
+              title: '审核管理',
+              icon: 'el-icon-wallet'
             },
             component: ReviewManage,
-            name: "review-manage",
-          },
-        ],
+            name: 'review-manage'
+          }
+        ]
       },
       {
-        path: "returnGoods",
+        path: 'returnGoods',
         component: ReturnGoods,
-        name: "return-goods",
+        name: 'return-goods',
         meta: {
-          name: "退货管理",
-          icon: "icon-quit",
+          title: '退货管理',
+          icon: 'el-icon-collection'
         },
-      },
-    ],
+        children: []
+      }
+    ]
   },
   {
-    path: "/goods",
+    path: '/goods',
     component: Layout,
     meta: {
-      name: "产品管理",
-      icon: "icon-order-manage",
+      title: '产品管理',
+      icon: 'el-icon-reading'
     },
-    redirect: "/goods/list",
+    redirect: '/goods/list',
+    alwaysShow: true,
     children: [
       {
-        path: "list",
+        path: 'list',
         component: GoodsList,
-        name: "goods-list",
+        name: 'goods-list',
         meta: {
-          name: "产品列表",
-          icon: "icon-name",
+          title: '产品列表',
+          icon: 'el-icon-mobile'
         },
+        children: []
       },
       {
-        path: "classify",
+        path: 'classify',
         component: GoodsClassify,
-        name: "goods-classify",
+        name: 'goods-classify',
         meta: {
-          name: "产品分类",
-          icon: "icon-name",
+          title: '产品分类',
+          icon: 'el-icon-c-scale-to-original'
         },
-      },
-    ],
-  },
-];
+        children: []
+      }
+    ]
+  }
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes: constantRoutes,
-});
+  routes: constantRoutes
+})
 
-export default router;
+export default router
 // const originalPush = VueRouter.prototype.push;
-const originalReplace = VueRouter.prototype.replace;
+const originalReplace = VueRouter.prototype.replace
 
 //replace
 VueRouter.prototype.replace = function push(location, onResolve, onReject) {
   if (onResolve || onReject)
-    return originalReplace.call(this, location, onResolve, onReject);
-  return originalReplace.call(this, location).catch((err) => err);
-};
+    return originalReplace.call(this, location, onResolve, onReject)
+  return originalReplace.call(this, location).catch((err) => err)
+}
