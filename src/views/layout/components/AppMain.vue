@@ -3,6 +3,7 @@
     <transition
       enter-active-class="animate__animated animate__backInRight"
       leave-active-class="animate__animated animate__backOutLeft"
+      mode="out-in"
     >
       <keep-alive :include="cachedViews">
         <router-view :key="key" />
