@@ -5,5 +5,9 @@
  */
 
 export function isExternal(path) {
-  return /^(https?:|mailto:|tel:)/.test(path);
+  return /^(https?:|mailto:|tel:)/.test(path)
+}
+
+export function regUrl(url) {
+  return RegExp(url + '.*')
 }

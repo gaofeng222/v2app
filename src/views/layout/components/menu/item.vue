@@ -13,7 +13,7 @@ export default {
     }
   },
   render(h, context) {
-    console.log('🚀 ~ render ~ context:', context)
+    // console.log('🚀 ~ render ~ context:', context)
     const { icon, title } = context.props
     const nodes = []
     if (icon) {

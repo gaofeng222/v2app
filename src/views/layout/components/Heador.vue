@@ -10,7 +10,7 @@
       <el-avatar :src="avatarUrl"></el-avatar>
       <el-dropdown @command="handlerClick">
         <span class="el-dropdown-link">
-          欢迎回来,zs
+          欢迎回来,{{ username }}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -22,37 +22,40 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex'
 export default {
   data() {
     return {
       avatarUrl:
-        "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
-    };
+        'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+    }
   },
   computed: {
-    ...mapGetters(["isCollapse"]),
+    ...mapGetters(['isCollapse', 'userInfo']),
+    username() {
+      console.log('🚀 ~ username ~ this.userInfo:', this.userInfo)
+      return this.userInfo.name
+    }
   },
   methods: {
     ...mapActions({
-      logoutHandle: "user/logoutHandle",
-      toggleSiderBar: "setting/toggleSiderBar",
+      logoutHandle: 'user/logoutHandle',
+      toggleSiderBar: 'setting/toggleSiderBar'
     }),
     async handlerClick(type) {
-      if (type === "logout") {
-        console.log("🚀 ~ handlerClick ~ type:", type);
-        const status = await this.logoutHandle();
+      if (type === 'logout') {
+        const status = await this.logoutHandle()
         if (status) {
           // this.$router.replace("/");
-          location.reload();
+          location.reload()
         }
       }
     },
     toggleHandler() {
-      this.toggleSiderBar();
-    },
-  },
-};
+      this.toggleSiderBar()
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

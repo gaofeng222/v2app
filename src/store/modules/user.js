@@ -1,19 +1,26 @@
 import router, { resetRouter } from '@/router'
-
+import { loginSys, getInfoSys } from '@/api'
+import Forbbiden from '@/views/errorPage/403.vue'
+import NotFound from '@/views/errorPage/404.vue'
 export default {
   namespaced: true,
   state: {
     token: localStorage.getItem('token') || '',
-    roles: []
+    roles: [],
+    userInfo: {}
   },
   getters: {},
   mutations: {
     SET_TOKEN(state, token) {
       state.token = token
+      localStorage.setItem('token', token)
     },
     REMOVE_TOKEN(state) {
       state.token = ''
       localStorage.removeItem('token')
+    },
+    SET_USERINFO(state, info) {
+      state.userInfo = info
     },
     SET_ROLES(state, roles) {
       state.roles = roles
@@ -24,11 +31,9 @@ export default {
   },
 
   actions: {
-    async loginHandler({ commit }) {
-      const res = await fetch('http://localhost:3000/login')
-      const data = await res.json()
-      commit('SET_TOKEN', data.token)
-      localStorage.setItem('token', data.token)
+    async loginHandler({ commit }, formData) {
+      const data = await loginSys(formData)
+      commit('SET_TOKEN', data.data.token)
       return data
     },
     logoutHandle({ commit }) {
@@ -39,11 +44,11 @@ export default {
       })
     },
     async getInfo({ commit, state }) {
-      const res = await fetch('http://localhost:3000/info')
-      const data = await res.json()
+      const data = await getInfoSys(state.token)
       console.log('🚀 ~ getInfo ~ data:', data)
-      commit('SET_ROLES', data.roles)
-      return data
+      commit('SET_ROLES', data.data.roles)
+      commit('SET_USERINFO', data.data)
+      return data.data
     },
     async getPermission({ commit }) {
       const res = await fetch('http://localhost:3000/admin_permission')
@@ -68,6 +73,23 @@ export default {
       const accessRoutes = await dispatch('permission/generateRoutes', roles, {
         root: true
       })
+      console.log('🚀 ~ changeRoles ~ accessRoutes:', accessRoutes)
+      const allRoutes = [
+        ...accessRoutes,
+        ...[
+          {
+            path: '/403',
+            hidden: true,
+            component: Forbbiden
+          },
+          {
+            path: '*',
+            hidden: true,
+            component: NotFound
+          }
+        ]
+      ]
+      allRoutes.forEach((ele) => router.addRoute(ele))
       // dynamically add accessible routes
       router.addRoutes(accessRoutes)
     }

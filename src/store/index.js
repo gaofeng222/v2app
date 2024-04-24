@@ -12,7 +12,8 @@ export default new Vuex.Store({
     roles: (state) => state.user.roles,
     isCollapse: (state) => state.setting.isCollapse,
     showLogo: (state) => state.setting.showLogo,
-    permission_routes: (state) => state.permission.routes
+    permission_routes: (state) => state.permission.routes,
+    userInfo: (state) => state.user.userInfo
   },
   mutations: {},
   actions: {},

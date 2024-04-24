@@ -1,3 +1,3 @@
 <template>
-  <div>directive-page</div>
+  <g-container>directive-page</g-container>
 </template>

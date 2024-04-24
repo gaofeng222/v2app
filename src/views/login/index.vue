@@ -1,6 +1,11 @@
 <template>
   <el-row align="center" type="flex">
-    <el-col class="hidden-sm-and-down login-left" :md="12" align="center" justify="center">
+    <el-col
+      class="hidden-sm-and-down login-left"
+      :md="12"
+      align="center"
+      justify="center"
+    >
       <div class="login-logo"></div>
     </el-col>
     <el-col class="login-right" :md="12" :sm="24">
@@ -19,7 +24,10 @@
             <el-input v-model.trim="ruleForm.username"></el-input>
           </el-form-item>
           <el-form-item label="密码：" prop="password">
-            <el-input type="password" v-model.trim="ruleForm.password"></el-input>
+            <el-input
+              type="password"
+              v-model.trim="ruleForm.password"
+            ></el-input>
           </el-form-item>
           <el-form-item>
             <div class="login-tools">
@@ -28,7 +36,9 @@
             </div>
           </el-form-item>
           <el-form-item>
-            <el-button @click="login" style="width: 100%;" type="primary">登录</el-button>
+            <el-button @click="login" style="width: 100%" type="primary"
+              >登录</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
@@ -37,34 +47,34 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
       rules: {
         username: [
-          { required: true, message: "请输入用户名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          { required: true, message: '请输入用户名称', trigger: 'blur' },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
         ],
         password: [
-          { required: true, message: "请输入用户密码", trigger: "blur" },
-          { min: 3, max: 6, message: "长度在 3 到 6 个字符", trigger: "blur" },
-        ],
+          { required: true, message: '请输入用户密码', trigger: 'blur' },
+          { min: 3, max: 6, message: '长度在 3 到 6 个字符', trigger: 'blur' }
+        ]
       },
-      ruleForm: { username: "", password: "", checked: false },
-    };
+      ruleForm: { username: '', password: '', checked: false }
+    }
   },
   methods: {
-    ...mapActions("user", {
-      loginHandler: "loginHandler",
+    ...mapActions('user', {
+      loginHandler: 'loginHandler'
     }),
     async login() {
-      await this.$refs.loginForm.validate();
-      const data = await this.loginHandler();
-      this.$router.replace("/");
-    },
-  },
-};
+      await this.$refs.loginForm.validate()
+      const data = await this.loginHandler(this.ruleForm)
+      this.$router.replace('/')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -75,7 +85,7 @@ export default {
 .login-left {
   .login-logo {
     height: 100%;
-    background: url("@/assets/images/login-box-bg3.svg") no-repeat center / 80%;
+    background: url('@/assets/images/login-box-bg3.svg') no-repeat center / 80%;
   }
 }
 .login-right {
