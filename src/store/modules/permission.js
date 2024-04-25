@@ -95,6 +95,7 @@ function hasPermisson(roles, route) {
  * @returns
  * 这里有个大坑，路由拼接"@/views/"要单独写，不要写在配置文件里面，不然会有找不到理由的报错!!!!!
  * 此处排查了一个小时，wtf!!!!!!!!!!!,不知道你们遇到了没有!!
+ * 参考此处：https://blog.csdn.net/weixin_43239880/article/details/129922664
  */
 function loadView(view) {
   return () => import("@/views/" + view);
