@@ -1,0 +1,81 @@
+{
+  "login": {
+    "code": 0,
+    "msg": "登录成功",
+    "token": "Bearer uqewioqewojiqewjmasjjijoisdjofijsdfjidsjjsdojf.jiajsdjasdjasjdiasjjqweqweqwyuyiym"
+  },
+  "posts": [
+    { "id": "1", "title": "a title", "views": 100 },
+    { "id": "2", "title": "another title", "views": 200 }
+  ],
+  "comments": [
+    { "id": "1", "text": "a comment about post 1", "postId": "1" },
+    { "id": "2", "text": "another comment about post 1", "postId": "1" }
+  ],
+  "info": {
+    "name": "admin",
+    "roles": ["admin", "test"],
+    "avatar": "",
+    "introduction": "I am an admin of this sys."
+  },
+  "admin_permission": {
+    "code": 0,
+    "message": "获取权限成功",
+    "data": [
+      {
+        "name": "订单管理",
+        "children": [
+          {
+            "name": "订单列表"
+          },
+          {
+            "name": "生产管理",
+            "children": [{ "name": "生产列表" }, { "name": "审核管理" }]
+          },
+          { "name": "退货管理" }
+        ]
+      },
+      {
+        "name": "产品管理",
+        "children": [
+          {
+            "name": "产品列表"
+          },
+          {
+            "name": "产品分类"
+          }
+        ]
+      }
+    ]
+  },
+  "vip_permission": {
+    "code": 0,
+    "message": "获取权限成功",
+    "data": [
+      {
+        "name": "订单管理",
+        "children": [
+          {
+            "name": "订单列表"
+          },
+          {
+            "name": "生产管理",
+            "children": [{ "name": "生产列表" }]
+          },
+          { "name": "退货管理" }
+        ]
+      },
+      {
+        "name": "产品管理",
+        "children": [
+          {
+            "name": "产品列表"
+          },
+          {
+            "name": "产品分类"
+          }
+        ]
+      }
+    ]
+  }
+}

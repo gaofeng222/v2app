@@ -1,0 +1,26 @@
+@import './sidebar.scss';
+:root {
+  --txt-gray: #333;
+}
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background-color: #f1f1f1;
+}
+
+.el-card {
+  box-sizing: border-box;
+}
+a,
+a:active {
+  text-decoration: none;
+}
