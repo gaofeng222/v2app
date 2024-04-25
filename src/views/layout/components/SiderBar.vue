@@ -24,27 +24,27 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
-import variables from '@/assets/styles/variables.module.scss'
-import Menu from './menu'
-import Logo from './Logo.vue'
+import { mapGetters } from "vuex";
+import variables from "@/assets/styles/variables.module.scss";
+import Menu from "./menu";
+import Logo from "./Logo.vue";
 export default {
   components: { Menu, Logo },
   computed: {
-    ...mapGetters(['isCollapse', 'showLogo', 'permission_routes']),
+    ...mapGetters(["isCollapse", "showLogo", "permission_routes"]),
     activeMenus() {
-      const route = this.$route
-      const { meta, path } = route
+      const route = this.$route;
+      const { meta, path } = route;
       if (meta.activeMenu) {
-        return meta.activeMenu
+        return meta.activeMenu;
       }
-      return path
+      return path;
     },
     variables() {
-      return variables
-    }
-  }
-}
+      return variables;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

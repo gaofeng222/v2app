@@ -1,14 +1,14 @@
 export default {
   namespaced: true,
-  state: { isCollapse: false, showLogo: true },
+  state: { isCollapse: false, showLogo: true, routeMode: "back" },
   mutations: {
     TOGGLE_COLLAPSE(state, payload) {
-      state.isCollapse = !state.isCollapse
-    }
+      state.isCollapse = !state.isCollapse;
+    },
   },
   actions: {
     toggleSiderBar({ commit }) {
-      commit('TOGGLE_COLLAPSE')
-    }
-  }
-}
+      commit("TOGGLE_COLLAPSE");
+    },
+  },
+};

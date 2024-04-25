@@ -2,12 +2,12 @@ export default {
   namespaced: true,
   state: {
     sidebar: {
-      opened: localStorage.getItem('sidebarStatus')
-        ? !!+localStorage.getItem('sidebarStatus')
+      opened: localStorage.getItem("sidebarStatus")
+        ? !!+localStorage.getItem("sidebarStatus")
         : true,
-      withoutAnimation: false
-    }
+      withoutAnimation: false,
+    },
   },
   mutations: {},
-  actions: {}
-}
+  actions: {},
+};
