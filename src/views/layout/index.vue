@@ -35,6 +35,14 @@ export default {
         openSidebar: !this.isCollapse
       }
     }
+  },
+  created() {
+    this.$notify({
+      type: 'success',
+      title: '温馨提示',
+      message: '欢迎体验本系统，好用的话，请多多转发分享，谢谢O(∩_∩)O',
+      position: 'bottom-right'
+    })
   }
 }
 </script>
