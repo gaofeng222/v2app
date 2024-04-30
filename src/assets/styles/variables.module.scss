@@ -22,6 +22,7 @@ $subMenuHover: #001528;
 $sideBarWidth: 210px;
 
 $primaryColor: var(--color-primary);  //用var盛放颜色变量，供于js里改变此变量使用
+$menuActieColor: var(--menu-color-primary);
 
 // the :export directive is the magic sauce for webpack
 // https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
@@ -34,5 +35,6 @@ $primaryColor: var(--color-primary);  //用var盛放颜色变量，供于js里�
   subMenuBg: $subMenuBg;
   subMenuHover: $subMenuHover;
   sideBarWidth: $sideBarWidth;
-  primaryColor:$primaryColor
+  primaryColor:$primaryColor;
+  menuActieColor:$menuActieColor
 }

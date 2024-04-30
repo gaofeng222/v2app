@@ -8,7 +8,7 @@
         :background-color="variables.primaryColor"
         :collapse="isCollapse"
         :text-color="variables.menuText"
-        :active-text-color="variables.menuActiveText"
+        :active-text-color="variables.menuActieColor"
         :unique-opened="true"
         :collapse-transition="true"
         mode="vertical"

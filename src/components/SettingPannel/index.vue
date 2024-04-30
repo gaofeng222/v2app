@@ -18,6 +18,14 @@
               color-format="rgb"
             ></el-color-picker>
           </el-form-item>
+          <el-form-item label="菜单高亮色：">
+            <el-color-picker
+              v-model="form.colors.menuActive"
+              show-alpha
+              @change="changeColorHandler"
+              color-format="rgb"
+            ></el-color-picker>
+          </el-form-item>
           <el-form-item label="路由模式：">
             <el-radio v-model="form.routeMode" label="前端路由"></el-radio>
             <el-radio v-model="form.routeMode" label="后端路由"></el-radio>
@@ -35,6 +43,7 @@
 import { mapGetters } from "vuex";
 import generateColors from "@/utils/color/color.js";
 const defaultColor = "#409eff";
+const defaultMenuActiveColor = "yellow";
 export default {
   props: {
     showPannel: {
@@ -48,9 +57,12 @@ export default {
         routeMode: true, //默认是前端路由
         colors: {
           primary: localStorage.getItem("color") || defaultColor,
+          menuActive:
+            localStorage.getItem("menuActiveColor") || defaultMenuActiveColor,
         },
       },
       localColor: "",
+      localMenuActiveColor: "",
       originalStylesheetCount: -1,
       originalStyle: "",
     };
@@ -58,6 +70,7 @@ export default {
   created() {
     this.getIndexStyle();
     this.localColor = localStorage.getItem("color");
+    this.localMenuActiveColor = localStorage.getItem("menuActiveColor");
   },
   mounted() {},
   computed: {
@@ -77,6 +90,9 @@ export default {
       this.form.colors.primary = this.localColor
         ? this.localColor
         : defaultColor;
+      this.form.colors.menuActive = this.localMenuActiveColor
+        ? this.localMenuActiveColor
+        : defaultMenuActiveColor;
       this.initColor();
     },
     handleClose() {
@@ -84,19 +100,14 @@ export default {
     },
 
     async changeColorHandler(value) {
-      console.log("🚀 ~ changeColorHandler ~ value:", value);
       this.form.colors = Object.assign(
         {},
         this.form.colors,
         generateColors(this.form.colors.primary)
       );
-
-      console.log(
-        "🚀 ~ changeColorHandler ~ generateColors(this.form.colors.primary):",
-        generateColors(this.form.colors.primary)
-      );
       this.writeNewStyle();
       localStorage.setItem("color", this.form.colors.primary);
+      localStorage.setItem("menuActiveColor", this.form.colors.menuActive);
     },
     //以下是处理主题色切换的操作
     //参考:https://www.jianshu.com/p/b6f0c0d20e86
@@ -161,6 +172,9 @@ export default {
       document
         .getElementsByTagName("body")[0]
         .style.setProperty("--color-primary", this.form.colors.primary);
+      document
+        .getElementsByTagName("body")[0]
+        .style.setProperty("--menu-color-primary", this.form.colors.menuActive);
       let cssText = this.originalStyle;
       Object.keys(this.form.colors).forEach((key) => {
         cssText = cssText.replace(
