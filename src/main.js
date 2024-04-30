@@ -1,13 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
+import "./router/permission.js";
 import store from "./store";
 import "@/assets/styles/index.scss";
 import "element-ui/lib/theme-chalk/display.css";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import GContainer from "@/components/container/index.vue";
-import "./router/permission.js";
 /**
  * mock数据
  */
