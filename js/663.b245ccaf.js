@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkv2app"]=self["webpackChunkv2app"]||[]).push([[663],{9663:function(n,u,t){t.r(u),t.d(u,{default:function(){return s}});var e=function(){var n=this,u=n._self._c;return u("g-container",[u("div",[n._v("产品分类")])])},r=[],a={data(){return{}}},l=a,c=t(1656),p=(0,c.A)(l,e,r,!1,null,null,null),s=p.exports}}]);
+//# sourceMappingURL=663.b245ccaf.js.map

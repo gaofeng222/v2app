@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkv2app"]=self["webpackChunkv2app"]||[]).push([[597],{1597:function(t,n,r){r.r(n),r.d(n,{default:function(){return i}});var u=function(){var t=this,n=t._self._c;return n("g-container",[t._v(" 产品列表 "),n("router-link",{attrs:{to:"/order/list"}},[t._v("订单列表")])],1)},e=[],l={data(){return{}}},a=l,s=r(1656),c=(0,s.A)(a,u,e,!1,null,null,null),i=c.exports}}]);
+//# sourceMappingURL=597.b14f70c4.js.map

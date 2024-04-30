@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkv2app"]=self["webpackChunkv2app"]||[]).push([[208],{5208:function(n,u,t){t.r(u),t.d(u,{default:function(){return c}});var e=function(){var n=this,u=n._self._c;return u("div",[n._v("订单列表")])},r=[],l={data(){return{}}},a=l,p=t(1656),s=(0,p.A)(a,e,r,!1,null,null,null),c=s.exports}}]);
+//# sourceMappingURL=208.4bb91755.js.map

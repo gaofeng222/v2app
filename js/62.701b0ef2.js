@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkv2app"]=self["webpackChunkv2app"]||[]).push([[62],{2062:function(n,u,e){e.r(u),e.d(u,{default:function(){return p}});var t=function(){var n=this,u=n._self._c;return u("g-container",[u("div",[n._v("退货管理")])])},l=[],r=e(1656),a={},c=(0,r.A)(a,t,l,!1,null,null,null),p=c.exports}}]);
+//# sourceMappingURL=62.701b0ef2.js.map
