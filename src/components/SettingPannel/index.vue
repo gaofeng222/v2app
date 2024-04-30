@@ -57,12 +57,13 @@ export default {
   data() {
     return {
       form: {
-        routeMode: true, //默认是前端路由
+        routeMode: "前端路由", //默认是前端路由
         colors: {
           primary: localStorage.getItem("color") || defaultColor,
           menuActive:
             localStorage.getItem("menuActiveColor") || defaultMenuActiveColor,
         },
+        showLogo: true,
       },
       localColor: "",
       localMenuActiveColor: "",
