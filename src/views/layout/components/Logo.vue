@@ -1,12 +1,7 @@
 <template>
   <div class="sidebar-logo-container">
     <transition name="sidebarLogoFade">
-      <router-link
-        v-if="collapse"
-        key="collapse"
-        class="sidebar-logo-link"
-        to="/"
-      >
+      <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo" />
         <h1 v-else class="sidebar-title">{{ title }}</h1>
       </router-link>
@@ -19,22 +14,22 @@
 </template>
 
 <script>
-import logo from '@/assets/logo.png'
+import logo from "@/assets/logo.png";
 export default {
-  name: 'SidebarLogo',
+  name: "SidebarLogo",
   props: {
     collapse: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      title: 'Vue Element System',
-      logo
-    }
-  }
-}
+      title: "Vue Element System",
+      logo,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -49,8 +44,8 @@ export default {
 .sidebar-logo-container {
   position: relative;
   width: 100%;
-  height: 50px;
-  line-height: 50px;
+  height: 70px;
+  line-height: 70px;
   background: #2b2f3a;
   text-align: center;
   overflow: hidden;
@@ -58,14 +53,13 @@ export default {
     width: 32px;
     height: 32px;
     vertical-align: middle;
-    margin-right: 12px;
   }
   .sidebar-title {
     display: inline-block;
     margin: 0;
     color: #fff;
     font-weight: 600;
-    line-height: 50px;
+    line-height: 70px;
     font-size: 14px;
     font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
     vertical-align: middle;

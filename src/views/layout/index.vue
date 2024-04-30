@@ -1,16 +1,15 @@
 <template>
   <el-container :class="classObj" class="app-wrapper">
     <el-aside :width="!isCollapse ? '210px' : '50px'">
-      <SiderBar
-        class="sidebar-container"
-        :style="{ width: !isCollapse ? '210px' : '50px' }"
-      />
+      <SiderBar class="sidebar-container" :style="{ width: !isCollapse ? '210px' : '50px' }" />
     </el-aside>
     <el-container>
       <el-header>
         <Heador />
       </el-header>
-      <el-main>
+      <el-main class="main-container">
+        <SettingBtn @showPannel="handleShowPannel" v-if="showSettingBtn" />
+        <SettingPannel :showPannel.sync="showPannel" ref="settingRef" />
         <AppMain />
       </el-main>
       <el-footer>
@@ -20,23 +19,36 @@
   </el-container>
 </template>
 <script>
-import { AppMain, Heador, Footer, SiderBar } from './components'
-import { mapGetters } from 'vuex'
+import { AppMain, Heador, Footer, SiderBar } from "./components";
+import SettingBtn from "@/components/setting";
+import SettingPannel from "@/components/SettingPannel";
+import { mapGetters } from "vuex";
+
 export default {
-  components: { AppMain, Heador, Footer, SiderBar },
+  components: { AppMain, Heador, Footer, SiderBar, SettingBtn, SettingPannel },
   data() {
-    return {}
+    return { showPannel: false };
   },
   computed: {
-    ...mapGetters(['isCollapse']),
+    ...mapGetters(["isCollapse", "showSettingBtn", "showLogo"]),
     classObj() {
       return {
         hideSidebar: this.isCollapse,
-        openSidebar: !this.isCollapse
-      }
-    }
-  }
-}
+        openSidebar: !this.isCollapse,
+      };
+    },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$refs.settingRef.initTheme();
+    });
+  },
+  methods: {
+    handleShowPannel() {
+      this.showPannel = true;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -48,6 +60,7 @@ export default {
 }
 .el-main {
   height: calc(100% - 70px);
+  position: relative;
 }
 .el-footer {
   height: 40px !important;
