@@ -8,7 +8,7 @@
         <Heador />
       </el-header>
       <el-main class="main-container">
-        <SettingBtn @showPannel="handleShowPannel" />
+        <SettingBtn @showPannel="handleShowPannel" v-if="showSettingBtn" />
         <SettingPannel v-if="showPannel" :showPannel.sync="showPannel" />
         <AppMain />
       </el-main>
@@ -29,7 +29,7 @@ export default {
     return { showPannel: false };
   },
   computed: {
-    ...mapGetters(["isCollapse"]),
+    ...mapGetters(["isCollapse", "showSettingBtn"]),
     classObj() {
       return {
         hideSidebar: this.isCollapse,

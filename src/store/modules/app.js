@@ -11,6 +11,7 @@ export default {
     },
     settingPannelTitle: setting.settingPannelTitle,
     settingPannelShowType: setting.settingPannelShowType,
+    showSettingBtn: setting.showSettingBtn,
   },
   mutations: {},
   actions: {},

@@ -17,6 +17,7 @@ export default new Vuex.Store({
     userInfo: (state) => state.user.userInfo,
     settingPannelTitle: (state) => state.app.settingPannelTitle,
     settingPannelShowType: (state) => state.app.settingPannelShowType,
+    showSettingBtn: (state) => state.app.showSettingBtn,
   },
   mutations: {},
   actions: {},
