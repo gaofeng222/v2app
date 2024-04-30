@@ -3,6 +3,7 @@
 :root {
   --txt-gray: #525252;
   --grey-bg:#f7f7f7;
+  --color-primary: #409eff;  //--color-primary  ：全局主题色变量
 }
 * {
   padding: 0;
@@ -26,3 +27,5 @@ a,
 a:active {
   text-decoration: none;
 }
+
+$--color-primary: red;

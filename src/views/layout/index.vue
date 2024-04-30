@@ -9,7 +9,7 @@
       </el-header>
       <el-main class="main-container">
         <SettingBtn @showPannel="handleShowPannel" v-if="showSettingBtn" />
-        <SettingPannel v-if="showPannel" :showPannel.sync="showPannel" />
+        <SettingPannel :showPannel.sync="showPannel" ref="settingRef" />
         <AppMain />
       </el-main>
       <el-footer>
@@ -23,6 +23,7 @@ import { AppMain, Heador, Footer, SiderBar } from "./components";
 import SettingBtn from "@/components/setting";
 import SettingPannel from "@/components/SettingPannel";
 import { mapGetters } from "vuex";
+
 export default {
   components: { AppMain, Heador, Footer, SiderBar, SettingBtn, SettingPannel },
   data() {
@@ -36,6 +37,11 @@ export default {
         openSidebar: !this.isCollapse,
       };
     },
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$refs.settingRef.initTheme();
+    });
   },
   methods: {
     handleShowPannel() {

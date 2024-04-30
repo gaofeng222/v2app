@@ -19,14 +19,14 @@ export default {
 $prefix: seting-container;
 .#{$prefix} {
   position: fixed;
-  right: 0;
+  right: 20px;
   top: 50%;
   z-index: 20;
   &__content {
     width: 40px;
     height: 60px;
     border-radius: 50px 0 0 50px;
-    background-color: #409eff;
+    background-color: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
