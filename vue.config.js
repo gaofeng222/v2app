@@ -1,7 +1,7 @@
-const { defineConfig } = require('@vue/cli-service')
-const path = require('path')
+const { defineConfig } = require("@vue/cli-service");
+const path = require("path");
 function resolve(dir) {
-  return path.join(__dirname, dir)
+  return path.join(__dirname, dir);
 }
 module.exports = defineConfig({
   publicPath: process.env.NODE_ENV === 'production' ? '/v2app/' : '/',
@@ -21,17 +21,34 @@ module.exports = defineConfig({
     // ])
 
     // set svg-sprite-loader
-    config.module.rule('svg').exclude.add(resolve('src/components/icons')).end()
     config.module
-      .rule('icons')
+      .rule("svg")
+      .exclude.add(resolve("src/components/icons"))
+      .end();
+    config.module
+      .rule("icons")
       .test(/\.svg$/)
-      .include.add(resolve('src/components/icons'))
+      .include.add(resolve("src/components/icons"))
       .end()
-      .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
+      .use("svg-sprite-loader")
+      .loader("svg-sprite-loader")
       .options({
-        symbolId: 'icon-[name]'
+        symbolId: "icon-[name]",
       })
-      .end()
-  }
-})
+      .end();
+  },
+  css: {
+    loaderOptions: {
+      scss: {
+        // additionalData: `@import "@/assets/styles/variables.scss";`,
+        //解决vuex里面Layout组件scss变量获取不到的问题
+        additionalData: (content, loaderContext) => {
+          const { resourcePath } = loaderContext;
+          if (resourcePath.endsWith("variables.module.scss")) return content;
+          return `@import "@/assets/styles/variables.module.scss"; 
+          ${content}`;
+        },
+      },
+    },
+  },
+});
