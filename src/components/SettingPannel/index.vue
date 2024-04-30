@@ -99,6 +99,7 @@ export default {
       localStorage.setItem("color", this.form.colors.primary);
     },
     //以下是处理主题色切换的操作
+    //参考:https://www.jianshu.com/p/b6f0c0d20e86
     getStyleTemplate(data) {
       const colorMap = {
         "#3a8ee6": "shade-1",
