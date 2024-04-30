@@ -12,12 +12,12 @@ export default new Vuex.Store({
   getters: {
     roles: (state) => state.user.roles,
     isCollapse: (state) => state.setting.isCollapse,
-    showLogo: (state) => state.setting.showLogo,
     permission_routes: (state) => state.permission.routes,
     userInfo: (state) => state.user.userInfo,
     settingPannelTitle: (state) => state.app.settingPannelTitle,
     settingPannelShowType: (state) => state.app.settingPannelShowType,
     showSettingBtn: (state) => state.app.showSettingBtn,
+    showLogo: (state) => state.app.showLogo,
   },
   mutations: {},
   actions: {},

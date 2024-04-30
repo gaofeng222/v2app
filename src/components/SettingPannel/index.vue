@@ -5,7 +5,7 @@
     :direction="settingPannelShowType"
     :before-close="handleClose"
     append-to-body
-    size
+    size="340px"
   >
     <el-row>
       <el-col :span="24">
@@ -26,6 +26,9 @@
               color-format="rgb"
             ></el-color-picker>
           </el-form-item>
+          <el-form-item label="显示Logo">
+            <el-switch v-model="form.showLogo" @change="toggleLogoHandler"></el-switch>
+          </el-form-item>
           <el-form-item label="路由模式：">
             <el-radio v-model="form.routeMode" label="前端路由"></el-radio>
             <el-radio v-model="form.routeMode" label="后端路由"></el-radio>
@@ -40,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import generateColors from "@/utils/color/color.js";
 const defaultColor = "#409eff";
 const defaultMenuActiveColor = "yellow";
@@ -85,6 +88,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      toggleLogo: "app/toggleLogo",
+    }),
     initTheme() {
       this.originalStylesheetCount = document.styleSheets.length;
       this.form.colors.primary = this.localColor
@@ -108,6 +114,10 @@ export default {
       this.writeNewStyle();
       localStorage.setItem("color", this.form.colors.primary);
       localStorage.setItem("menuActiveColor", this.form.colors.menuActive);
+    },
+    toggleLogoHandler(value) {
+      console.log("🚀 ~ toggleLogoHandler ~ value:", value);
+      this.toggleLogo(value);
     },
     //以下是处理主题色切换的操作
     //参考:https://www.jianshu.com/p/b6f0c0d20e86

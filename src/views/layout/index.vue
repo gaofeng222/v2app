@@ -30,7 +30,7 @@ export default {
     return { showPannel: false };
   },
   computed: {
-    ...mapGetters(["isCollapse", "showSettingBtn"]),
+    ...mapGetters(["isCollapse", "showSettingBtn", "showLogo"]),
     classObj() {
       return {
         hideSidebar: this.isCollapse,
