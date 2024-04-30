@@ -4,6 +4,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 module.exports = defineConfig({
+  publicPath: process.env.NODE_ENV === 'production' ? '/v2app/' : '/',
   transpileDependencies: true,
   chainWebpack(config) {
     // when there are many pages, it will cause too many meaningless requests
