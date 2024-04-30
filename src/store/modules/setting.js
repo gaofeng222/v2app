@@ -1,6 +1,6 @@
 export default {
   namespaced: true,
-  state: { isCollapse: false, showLogo: true, routeMode: "back" },
+  state: { isCollapse: false },
   mutations: {
     TOGGLE_COLLAPSE(state, payload) {
       state.isCollapse = !state.isCollapse;
