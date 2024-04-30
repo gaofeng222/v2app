@@ -5,11 +5,11 @@
     :direction="settingPannelShowType"
     :before-close="handleClose"
     append-to-body
-    size="340px"
+    size="420px"
   >
     <el-row>
       <el-col :span="24">
-        <el-form ref="form" :model="form" label-width="100px">
+        <el-form ref="form" :model="form" label-width="100px" style="padding:0 20px;">
           <el-form-item label="主题色：">
             <el-color-picker
               v-model="form.colors.primary"
