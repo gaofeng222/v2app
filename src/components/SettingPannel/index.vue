@@ -33,6 +33,9 @@
             <el-radio v-model="form.routeMode" label="前端路由"></el-radio>
             <el-radio v-model="form.routeMode" label="后端路由"></el-radio>
           </el-form-item>
+          <el-form-item label="暗黑模式：">
+            <el-switch v-model="form.darkMode" @change="toggleDarkModeHandler"></el-switch>
+          </el-form-item>
           <el-form-item>
             <el-button type="primary">确定</el-button>
           </el-form-item>
@@ -64,6 +67,7 @@ export default {
             localStorage.getItem("menuActiveColor") || defaultMenuActiveColor,
         },
         showLogo: true,
+        darkMode: !!localStorage.getItem("isDarkMode"),
       },
       localColor: "",
       localMenuActiveColor: "",
@@ -101,6 +105,11 @@ export default {
         ? this.localMenuActiveColor
         : defaultMenuActiveColor;
       this.initColor();
+      const isDarkMode = localStorage.getItem("isDarkMode");
+      //eslint-ignore
+      if (isDarkMode == 1) {
+        this.toggleDarkModeHandler();
+      }
     },
     handleClose() {
       this.$emit("update:showPannel", !this.showPannel);
@@ -119,6 +128,14 @@ export default {
     toggleLogoHandler(value) {
       console.log("🚀 ~ toggleLogoHandler ~ value:", value);
       this.toggleLogo(value);
+    },
+    toggleDarkModeHandler(value) {
+      const body = document.body;
+      body.classList.toggle("dark-mode");
+      localStorage.setItem(
+        "isDarkMode",
+        body.classList.contains("dark-mode") ? 1 : 0
+      );
     },
     //以下是处理主题色切换的操作
     //参考:https://www.jianshu.com/p/b6f0c0d20e86

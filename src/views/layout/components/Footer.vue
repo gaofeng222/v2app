@@ -5,6 +5,6 @@
 .footer-container {
   text-align: center;
   line-height: 40px;
-  color: var(--txt-gray);
+  color: var(--txt-color);
 }
 </style>
