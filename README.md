@@ -48,3 +48,7 @@ npm run lint
     第二步：import path from 'path-browserify'
 
            或者：在 vue.config.js 里面修改
+
+## vuedraggable 的参考官网
+
+- https://sortablejs.github.io/Vue.Draggable/#/custom-clone

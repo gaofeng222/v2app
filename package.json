@@ -20,8 +20,10 @@
     "svg-sprite-loader": "^6.0.11",
     "svgo": "^3.2.0",
     "url": "^0.11.3",
+    "uuid": "^9.0.1",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
+    "vuedraggable": "^2.24.3",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
