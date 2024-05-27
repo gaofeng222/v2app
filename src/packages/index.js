@@ -1,6 +1,7 @@
 import Alert from "./Alert/index";
+import Aside from "./Aside/index";
 
-const components = [Alert];
+const components = [Alert, Aside];
 
 const install = function (Vue, opts) {
   components.forEach((component) => {
