@@ -110,6 +110,26 @@ const users = {
           },
         ],
       },
+      {
+        path: "/Gui",
+        component: "Layout",
+        meta: {
+          title: "Gui组件库的测试",
+          icon: "el-icon-question",
+        },
+        children: [
+          {
+            path: "alert",
+            component: "GUI-components/Alert",
+            name: "alert",
+            meta: {
+              title: "alert组件",
+              icon: "el-icon-s-goods",
+            },
+            children: [],
+          },
+        ],
+      },
     ],
   },
   "editor-token": {

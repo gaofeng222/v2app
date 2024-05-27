@@ -8,10 +8,17 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import GContainer from "@/components/container/index.vue";
 import "./router/permission.js";
+import GUI from "./packages/index";
 /**
  * mock数据
  */
 import "../mock";
+
+/**
+ * 安装自动以组件库
+ */
+
+Vue.use(GUI);
 
 //注册svg-icon组件
 import "@/components/icons";
