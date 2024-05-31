@@ -8,5 +8,6 @@
 .el-card {
   height: 100%;
   box-sizing: border-box;
+  overflow: auto;
 }
 </style>

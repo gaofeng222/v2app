@@ -20,8 +20,49 @@
       <gf-input v-if="showType" type="textarea" v-model="content" showWordLimit maxlength="10" />
       <gf-input v-else size="24px" v-model="content" />
     </div>
-    <el-input type="textarea" v-model="elVal" :autosize="{ minRows: 2, maxRows: 4}"></el-input>
-    <gf-input type="textarea" v-model="title" :autosize="{ minRows: 6, maxRows: 8}" />
+    <br />
+    <br />
+    <hr />
+    <br />
+    <br />
+    <el-form
+      :model="ruleForm"
+      :rules="rules"
+      ref="ruleForm"
+      label-width="auto"
+      class="demo-ruleForm"
+      :labelSuffix="'is a context'"
+      status-icon
+      inline
+    >
+      <el-form-item label="活动名称" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submit">提交</el-button>
+      </el-form-item>
+    </el-form>
+
+    <gf-form
+      :model="ruleForm"
+      :rules="rules"
+      ref="ruleForm1"
+      label-width="auto"
+      class="demo-ruleForm"
+      :labelSuffix="'is a test'"
+      status-icon
+      inline
+    >
+      <gf-form-item label="活动名称" prop="name">
+        <gf-input v-model="ruleForm.name"></gf-input>
+      </gf-form-item>
+      <gf-form-item label="场地" prop="position">
+        <gf-input v-model="ruleForm.position"></gf-input>
+      </gf-form-item>
+      <gf-form-item>
+        <el-button type="primary" @click="submit1">提交</el-button>
+      </gf-form-item>
+    </gf-form>
   </g-container>
 </template>
 
@@ -35,11 +76,46 @@ export default {
       elVal: "",
       content: "",
       showType: true,
+      ruleForm: {
+        name: "",
+        position: "",
+      },
+      rules: {
+        name: [
+          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        ],
+        position: [
+          { required: true, message: "请输入活动场地名称" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        ],
+      },
     };
   },
   methods: {
-    handleClose() {
-      alert("我被关闭了");
+    handleClose() {},
+    submit() {
+      this.$refs.ruleForm.validate((valid) => {
+        console.log("🚀 ~ this.$refs.ruleForm.validate ~ valid:", valid);
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+
+    submit1() {
+      this.$refs.ruleForm1.validate((valid) => {
+        console.log("🚀 ~ this.$refs.ruleForm.validate ~ valid:", valid);
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
   },
 };

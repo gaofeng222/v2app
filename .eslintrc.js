@@ -17,5 +17,6 @@ module.exports = {
     "prettier/prettier": "off",
     "vue/multi-word-component-names": "off",
     "no-unused-vars": "off",
+    "vue/no-side-effects-in-computed-properties": "off",
   },
 };

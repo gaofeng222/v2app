@@ -3,6 +3,7 @@
     :class="[ type === 'textarea' ? 'el-textarea' : 'el-input',inputSize ? 'el-input--' + inputSize : '',
     {
       'is-disabled': inputDisabled,
+      'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
     }]"
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
@@ -26,12 +27,12 @@
         v-bind="$attrs"
         :aria-label="label"
         @change="handleChange"
-        :autocomplete="autoComplete || autocomplete"
+        :autocomplete="autocomplete"
       />
       <!-- 后置内容 -->
       <span class="el-input__suffix" v-if="getSuffixVisible">
         <span class="el-input__suffix-inner">
-          <template v-if="!showClear || !showPwdVisible">
+          <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix"></slot>
             <i :class="[suffixIcon,'el-input__icon']" v-if="suffixIcon"></i>
           </template>
@@ -51,6 +52,11 @@
             <span class="el-input__count-inner">{{ textLength }}/{{ upperLimit }}</span>
           </span>
         </span>
+        <i
+          class="el-input__icon"
+          v-if="validateState"
+          :class="['el-input__validateIcon', validateIcon]"
+        ></i>
       </span>
       <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">
@@ -94,6 +100,15 @@ export default {
       textareaCalcStyle: {},
     };
   },
+  inject: {
+    gfForm: {
+      default: "",
+    },
+    gfFormItem: {
+      default: "",
+    },
+  },
+
   mixins: [emitter],
   props: {
     value: [String, Number],
@@ -128,15 +143,30 @@ export default {
       type: String,
       default: "off",
     },
+    validateEvent: {
+      type: Boolean,
+      default: true,
+    },
   },
   watch: {
     nativeInputValue() {
       this.setNativeInputValue();
     },
+    value(val) {
+      if (this.validateEvent) {
+        this.dispatch("GfFormItem", "gf.form.change", [val]);
+      }
+    },
   },
   computed: {
     inputSize() {
       return this.size;
+    },
+    validateState() {
+      return this.gfFormItem ? this.gfFormItem.validateState : "";
+    },
+    needStatusIcon() {
+      return this.gfForm ? this.gfForm.statusIcon : false;
     },
     inputType() {
       return this.showPassword
@@ -157,7 +187,14 @@ export default {
       );
     },
     getSuffixVisible() {
-      return this.$slots.suffix || this.suffixIcon || this.showClear;
+      return (
+        this.$slots.suffix ||
+        this.suffixIcon ||
+        this.showClear ||
+        this.showPassword ||
+        this.isWordLimitVisible ||
+        (this.validateState && this.needStatusIcon)
+      );
     },
     showPwdVisible() {
       return (
@@ -196,6 +233,13 @@ export default {
     textareaStyle() {
       return merge({}, this.textareaCalcStyle, { resize: this.resize });
     },
+    validateIcon() {
+      return {
+        validating: "el-icon-loading",
+        success: "el-icon-circle-check",
+        error: "el-icon-circle-close",
+      }[this.validateState];
+    },
   },
   methods: {
     focus() {
@@ -230,7 +274,7 @@ export default {
       this.focused = false;
       this.$emit("blur", event);
       if (this.validateEvent) {
-        this.dispatch("ElFormItem", "el.form.blur", [this.value]);
+        this.dispatch("GfFormItem", "gf.form.blur", [this.value]);
       }
     },
     select() {

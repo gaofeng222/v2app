@@ -1,8 +1,10 @@
 import Alert from "./Alert/index";
 import Aside from "./Aside/index";
 import Ainput from "./Ainput/index";
+import Aform from "./Aform/index";
+import AformItem from "./AformItem/index";
 
-const components = [Alert, Aside, Ainput];
+const components = [Alert, Aside, Ainput, Aform, AformItem];
 
 const install = function (Vue, opts) {
   components.forEach((component) => {
