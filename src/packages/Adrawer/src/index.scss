@@ -1,0 +1,24 @@
+@mixin drawer-animation($direction) {
+   @keyframes #{$direction}-drawer-in{
+      0%{ 
+        @if $direction == rtl {
+          transform: translate(100%, 0);
+        }
+      }
+      100%{
+        @if $direction == rtl {
+          transform:translate(0,0)
+        }
+      }
+   }
+
+   @keyframes #{$direction}-drawer-out{ 
+     0%{
+      @if $direction == rtl {
+        transform: translate(100%,0)
+      }
+     }
+   }
+}
+
+@include drawer-animation(rtl); 

@@ -5,6 +5,11 @@
       <el-alert type="info" title="普通的信息提示" showIcon></el-alert>
       <el-alert type="success" title="成功" description="这是一段自定义描述内容" showIcon></el-alert>
     </GfAside>
+    <br />
+    <br />
+    <hr />
+    <br />
+    <br />
     {{ username }}
     <gf-input v-model="username" size="24px" tabindex="3" placeholder="请输入内容" clearable />
     <gf-input size="24px" disabled showClear />

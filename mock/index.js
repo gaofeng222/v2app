@@ -121,10 +121,20 @@ const users = {
           {
             path: "alert",
             component: "GUI-components/Alert",
-            name: "alert",
+            name: "Alert",
             meta: {
               title: "alert组件",
               icon: "el-icon-s-goods",
+            },
+            children: [],
+          },
+          {
+            path: "drawer",
+            component: "GUI-components/Drawer",
+            name: "Drawer",
+            meta: {
+              title: "Drawer组件",
+              icon: "el-icon-s-order",
             },
             children: [],
           },
