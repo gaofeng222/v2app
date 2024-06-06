@@ -4,7 +4,7 @@
       <div
         class="el-drawer__container"
         :class="visible && 'el-drawer__open'"
-        @click="handleWrapperClick"
+        @click.self="handleWrapperClick"
       >
         <div
           class="el-drawer"
@@ -35,11 +35,11 @@
 </template>
 
 <script>
-import Popup from "element-ui/src/utils/popup";
+import Popup from "@/utils/popup";
 export default {
   name: "GfDrawer",
   data() {
-    return { rendered: false };
+    return { closed: false, prevActiveElement: null };
   },
   mixins: [Popup],
   props: {
@@ -88,23 +88,62 @@ export default {
       type: Boolean,
       default: true,
     },
+    closeOnPressEscape: {
+      type: Boolean,
+      default: true,
+    },
   },
   mounted() {
     if (this.visible) {
+      this.open();
       this.rendered = true;
       if (this.appendToBody) {
         document.body.appendChild(this.$el);
       }
     }
   },
+  watch: {
+    visible(value) {
+      console.log("🚀 ~ visible ~ value11111:", value);
+      if (value) {
+        this.closed = false;
+        this.$emit("open");
+        if (this.appendToBody) {
+          if (this.appendToBody) {
+            document.body.appendChild(this.$el);
+          }
+          this.prevActiveElement = document.activeElement;
+        } else {
+          if (!this.closed) {
+            this.$emit("close");
+            if (this.destroyOnClose === true) {
+              this.rendered = false;
+            }
+          }
+          this.$nextTick(() => {
+            if (this.prevActiveElement) {
+              this.prevActiveElement.focus();
+            }
+          });
+        }
+      }
+    },
+  },
   methods: {
-    afterEnter() {},
-    afterLeave() {},
+    afterEnter() {
+      this.$emit("opened");
+    },
+    afterLeave() {
+      this.$emit("closed");
+    },
     hide(cancel) {
-      console.log("🚀 ~ hide ~ cancel:", cancel);
       if (cancel != false) {
-        console.log("ok");
         this.$emit("update:visible", false);
+        this.$emit("closed");
+        if (this.destroyOnClose) {
+          this.rendered = false;
+        }
+        this.closed = true;
       }
     },
     handleWrapperClick() {
@@ -118,6 +157,9 @@ export default {
       } else {
         this.hide();
       }
+    },
+    handleClose() {
+      this.closeDrawer();
     },
   },
   computed: {

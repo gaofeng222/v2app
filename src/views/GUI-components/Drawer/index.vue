@@ -2,12 +2,14 @@
   <g-container>
     <gf-drawer
       :visible.sync="drawer1"
-      :wrapperClosable="false"
+      :before-close="handleClose1"
+      wrapperClosable
       appendToBody
       :title="title"
       :openDelay="3000"
+      modalAppendToBody
     >
-      <div>我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!</div>
+      <div>我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!</div>
     </gf-drawer>
     <el-button type="primary" @click="showDrawer1">showDrawer1</el-button>
     <el-button type="primary" @click="showDrawer">showDrawer</el-button>
@@ -21,6 +23,7 @@
       appendToBody
       @opened="handleOpened"
       :openDelay="3000"
+      modalAppendToBody
     >
       <div>我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!</div>
     </el-drawer>
@@ -46,6 +49,9 @@ export default {
     },
     handleClose() {
       this.drawer = false;
+    },
+    handleClose1() {
+      this.drawer1 = false;
     },
     handleOpen() {
       alert("handleOpen");
