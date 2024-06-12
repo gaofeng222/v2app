@@ -6,6 +6,7 @@ import AformItem from "./AformItem/index";
 import Adrawer from "./Adrawer/index";
 import Atag from "./Atag/index";
 import GfSpace from "./Aspace/index";
+import GfMessage from "./AMessage/index";
 
 const components = [
   Alert,
@@ -22,6 +23,8 @@ const install = function (Vue, opts) {
   components.forEach((component) => {
     Vue.component(component.name, component);
   });
+
+  Vue.prototype.$GfMessage = GfMessage;
 };
 
 if (typeof window != "undefined" && window.Vue) {

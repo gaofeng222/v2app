@@ -1,6 +1,6 @@
 <template>
   <g-container>
-    <Gf-space flex gap="10">
+    <Gf-space flex :gap="10">
       <gf-tag
         closable
         @close="handleTagClose"
@@ -9,7 +9,7 @@
         :type="item.type"
       >{{ item.name }}</gf-tag>
     </Gf-space>
-    <Gf-space flex gap="10" direction="column">
+    <Gf-space flex :gap="10" direction="column">
       <gf-tag
         closable
         effect="dark"
@@ -32,6 +32,11 @@
     </gf-drawer>
     <el-button type="primary" @click="showDrawer1">showDrawer1</el-button>
     <el-button type="primary" @click="showDrawer">showDrawer</el-button>
+    <br />
+    <br />
+    <div>
+      <el-button type="danger" @click="showHandleMessage">showMessage</el-button>
+    </div>
     <el-drawer
       title="我是标题"
       :visible.sync="drawer"
@@ -88,6 +93,13 @@ export default {
     },
     handleTagClose() {
       this.showTag = false;
+    },
+    showHandleMessage() {
+      this.$GfMessage({
+        message: "这是一条消息提示",
+        showClose: true,
+        duration: 1500,
+      });
     },
   },
 };

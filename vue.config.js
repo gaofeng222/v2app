@@ -19,7 +19,6 @@ module.exports = defineConfig({
     //   }
     // ])
     config.plugin("html").tap((args) => {
-      console.log("🚀 ~ config.plugin ~ args:", args);
       args[0].title = "vue-admin";
       return args;
     });
