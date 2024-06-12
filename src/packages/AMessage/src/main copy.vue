@@ -49,7 +49,7 @@ export default {
   computed: {
     positionStyle() {
       return {
-        bottom: `${this.verticalOffset}px`,
+        top: `${this.verticalOffset}px`,
       };
     },
     typeClass() {
@@ -96,11 +96,4 @@ export default {
 </script>
 
 <style lang="scss">
-.el-message {
-  top: auto;
-  transition: bottom 0.4s;
-  left: auto;
-  right: 30px;
-  transform: translateX(0);
-}
 </style>

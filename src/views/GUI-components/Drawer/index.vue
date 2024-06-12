@@ -94,12 +94,16 @@ export default {
     handleTagClose() {
       this.showTag = false;
     },
-    showHandleMessage() {
+    showHandleMessage1() {
       this.$GfMessage({
         message: "这是一条消息提示",
         showClose: true,
         duration: 1500,
+        type: "warning",
       });
+    },
+    showHandleMessage() {
+      this.$GfMessage("这是一条消息提示");
     },
   },
 };

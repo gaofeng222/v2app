@@ -45,6 +45,21 @@ const GfMessage = (options = {}) => {
   return instance;
 };
 
+["success", "warning", "info", "error"].forEach((type) => {
+  GfMessage[type] = (options) => {
+    if (isObject(options) && !isVNode(options)) {
+      return GfMessage({
+        ...options,
+        type,
+      });
+    }
+    return GfMessage({
+      type,
+      message: options,
+    });
+  };
+});
+
 GfMessage.close = function (id, userOnClose) {
   let index = -1;
   let len = instances.length;
@@ -60,12 +75,11 @@ GfMessage.close = function (id, userOnClose) {
       break;
     }
   }
-  console.log("🚀 ~ index:", index);
   if (len <= 1 || index === -1 || index > instances.length - 1) return;
   for (let i = index; i < len - 1; i++) {
     let dom = instances[i].$el;
-    dom.style["top"] =
-      parseInt(dom.style["top"], 10) - removeHeight - 16 + "px";
+    dom.style["bottom"] =
+      parseInt(dom.style["bottom"], 10) - removeHeight - 16 + "px";
   }
 };
 
