@@ -7,7 +7,9 @@ import NotFound from "@/views/errorPage/404.vue";
 import Message from "element-ui";
 const whiteList = ["/login", "/auth-redirect"]; // no redirect whitelist
 router.beforeEach(async (to, from, next) => {
-  document.title = to.meta.title;
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
   // start progress bar
   NProgress.start();
   const { token } = store.state.user;

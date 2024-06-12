@@ -4,8 +4,19 @@ import Ainput from "./Ainput/index";
 import Aform from "./Aform/index";
 import AformItem from "./AformItem/index";
 import Adrawer from "./Adrawer/index";
+import Atag from "./Atag/index";
+import GfSpace from "./Aspace/index";
 
-const components = [Alert, Aside, Ainput, Aform, AformItem, Adrawer];
+const components = [
+  Alert,
+  Aside,
+  Ainput,
+  Aform,
+  AformItem,
+  Adrawer,
+  Atag,
+  GfSpace,
+];
 
 const install = function (Vue, opts) {
   components.forEach((component) => {

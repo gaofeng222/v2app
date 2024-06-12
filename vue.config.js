@@ -18,8 +18,13 @@ module.exports = defineConfig({
     //     include: 'initial'
     //   }
     // ])
-
+    config.plugin("html").tap((args) => {
+      console.log("🚀 ~ config.plugin ~ args:", args);
+      args[0].title = "vue-admin";
+      return args;
+    });
     // set svg-sprite-loader
+
     config.module
       .rule("svg")
       .exclude.add(resolve("src/components/icons"))

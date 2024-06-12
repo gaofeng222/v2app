@@ -1,5 +1,24 @@
 <template>
   <g-container>
+    <Gf-space flex gap="10">
+      <gf-tag
+        closable
+        @close="handleTagClose"
+        v-for="item in tags"
+        :key="item.name"
+        :type="item.type"
+      >{{ item.name }}</gf-tag>
+    </Gf-space>
+    <Gf-space flex gap="10" direction="column">
+      <gf-tag
+        closable
+        effect="dark"
+        @close="handleTagClose"
+        v-for="item in tags"
+        :key="item.name"
+        :type="item.type"
+      >{{ item.name }}</gf-tag>
+    </Gf-space>
     <gf-drawer
       :visible.sync="drawer1"
       :before-close="handleClose1"
@@ -38,6 +57,14 @@ export default {
       direction: "rtl",
       drawer1: false,
       title: "弹窗标题",
+      showTag: true,
+      tags: [
+        { name: "标签一", type: "" },
+        { name: "标签二", type: "success" },
+        { name: "标签三", type: "info" },
+        { name: "标签四", type: "warning" },
+        { name: "标签五", type: "danger" },
+      ],
     };
   },
   methods: {
@@ -58,6 +85,9 @@ export default {
     },
     handleOpened() {
       alert("handleOpened");
+    },
+    handleTagClose() {
+      this.showTag = false;
     },
   },
 };

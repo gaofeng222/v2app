@@ -1,5 +1,5 @@
 <template>
-  <aside class="el-aside" :style="{width}">
+  <aside class="el-aside" :style="{width}" v-bind="$attrs">
     <slot></slot>
   </aside>
 </template>
@@ -16,6 +16,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
