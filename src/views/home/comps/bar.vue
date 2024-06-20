@@ -15,6 +15,10 @@ export default {
       type: String,
       default: "light",
     },
+    customeOptions: {
+      type: Object,
+      default: () => {},
+    },
   },
   watch: {
     theme: {
@@ -42,7 +46,7 @@ export default {
       this.myChart = echarts.init(this.$refs["bar-box"], this.computedTheme);
       this.myChart.showLoading();
       const data = await this.option(this.type);
-      this.myChart.setOption(data);
+      this.myChart.setOption(Object.assign({}, data, this.customeOptions));
       this.myChart.hideLoading();
     },
     option(type) {
@@ -71,6 +75,9 @@ export default {
           });
         }, 3000);
       });
+    },
+    updateBarchart(data) {
+      this.myChart.setOption(data);
     },
   },
   beforeDestroy() {
