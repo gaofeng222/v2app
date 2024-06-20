@@ -138,6 +138,16 @@ const users = {
             },
             children: [],
           },
+          {
+            path: "form",
+            component: "GUI-components/Form",
+            name: "Drawer",
+            meta: {
+              title: "Form组件",
+              icon: "el-icon-takeaway-box",
+            },
+            children: [],
+          },
         ],
       },
     ],

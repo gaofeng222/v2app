@@ -65,14 +65,25 @@
         <gf-input v-model="ruleForm.position"></gf-input>
       </gf-form-item>
       <gf-form-item>
-        <el-button type="primary" @click="submit1">提交</el-button>
+        <el-button type="primary" @click="submit1">提交222</el-button>
       </gf-form-item>
     </gf-form>
+    <ul>
+      <li v-for="item in books" :key="item">{{ item }}</li>
+    </ul>
   </g-container>
 </template>
 
 <script>
+import { person } from "@/utils";
+console.log("🚀 ~ person:", person);
+person.name = "刘德华";
+console.log("🚀 ~ person111:", person);
 export default {
+  created() {
+    this.books = person.books;
+    console.log("🚀 ~ person:-created", person);
+  },
   data() {
     return {
       title: "吞吞吐吐吞吞吐吐拖拖沓沓",
@@ -112,6 +123,7 @@ export default {
     },
 
     submit1() {
+      console.log("bbb", person.name);
       this.$refs.ruleForm1.validate((valid) => {
         console.log("🚀 ~ this.$refs.ruleForm.validate ~ valid:", valid);
         if (valid) {

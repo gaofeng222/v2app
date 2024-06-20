@@ -51,10 +51,31 @@
     >
       <div>我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!我来啦!</div>
     </el-drawer>
+    <el-form :model="form">
+      <el-form-item label="姓名">
+        <el-input v-model="form.name" />
+      </el-form-item>
+      <el-form-item label="年龄">
+        <el-input v-model.number="form.age" />
+      </el-form-item>
+      <el-form-item label="地址">
+        <el-input v-model="form.address" />
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="handleSubmit">提交</el-button>
+        <el-button type="primary" @click="handleReset">重置</el-button>
+      </el-form-item>
+    </el-form>
+    <ul>
+      <li v-for="item in books" :key="item">{{ item }}</li>
+    </ul>
   </g-container>
 </template>
 
 <script>
+import { person } from "@/utils";
+console.log("🚀 ~ person:", person);
+
 export default {
   data() {
     return {
@@ -70,9 +91,25 @@ export default {
         { name: "标签四", type: "warning" },
         { name: "标签五", type: "danger" },
       ],
+      form: {
+        name: "",
+        age: "10",
+        address: "北京",
+      },
     };
   },
+  created() {
+    this.books = person.books;
+    console.log("🚀 ~ person:-created222", person);
+  },
   methods: {
+    handleSubmit() {
+      console.log("aaa", person.name);
+      person.books.push("java高级程序设计");
+      console.log(this.form);
+      this.books = person.books;
+    },
+    handleReset() {},
     showDrawer1() {
       this.drawer1 = !this.drawer1;
     },
