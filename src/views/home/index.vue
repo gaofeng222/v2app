@@ -108,7 +108,7 @@
               <c-input @focus="onFocus" v-model="message1" label="姓名：" />
               <br />
               {{ doc }}
-              <text-document :value.sync="doc" />
+              <text-document v-bind.sync="doc" />
             </div>
           </el-card>
         </el-col>
