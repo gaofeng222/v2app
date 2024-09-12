@@ -1,7 +1,6 @@
 <template>
   <div>
     <label>
-      {{ value }}
       <input type="checkbox" :checked="checked" @change="handleChange" />
     </label>
   </div>
@@ -9,24 +8,23 @@
 
 <script>
 export default {
-  name: "CCheckbox",
+  name: 'CCheckbox',
   model: {
-    prop: "checked",
-    event: "change",
+    prop: 'checked',
+    event: 'change'
   },
   props: {
     checked: Boolean,
     value: {
       type: String,
-      default: "复选框",
-    },
+      default: '复选框'
+    }
   },
   methods: {
     handleChange($event) {
-      this.$emit("change", $event.target.checked);
-    },
-  },
-};
+      this.$emit('change', $event.target.checked)
+    }
+  }
+}
 </script>
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>
