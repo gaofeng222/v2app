@@ -28,11 +28,28 @@
             :key="index"
           >
             <span
-              :class="['calendar-day', im.isCurrentMonth && 'current']"
+              :class="[
+                'calendar-day',
+                im.isCurrentMonth && 'current',
+                im.isToday && im.isCurrentMonth && 'today'
+              ]"
               v-for="(im, idx) in item"
               :key="idx"
             >
               {{ im.label }}
+              <strong>{{ im.cnDay }}</strong>
+              <strong
+                v-if="!im.isWorkday && im.isCurrentMonth"
+                class="calendar-day-rest"
+              >
+                {{ im.isWorkday ? '' : '休' }}
+              </strong>
+              <strong
+                v-if="im.isToday && im.isCurrentMonth"
+                class="calendar-day-today"
+              >
+                今
+              </strong>
             </span>
           </div>
         </div>
@@ -42,6 +59,10 @@
 </template>
 <script>
 import dayjs from 'dayjs'
+import { isWorkday } from './util'
+import isToday from 'dayjs/plugin/isToday'
+import { Lunar } from 'lunar-javascript'
+dayjs.extend(isToday)
 export default {
   name: 'Calendar',
   data() {
@@ -53,14 +74,14 @@ export default {
     }
   },
   created() {
-    console.log(dayjs().startOf('month').format('YYYY-MM-DD'))
-    console.log(dayjs().endOf('month').format('YYYY-MM-DD'))
-    console.log(dayjs().startOf('month').add(1, 'week').format('YYYY-MM-DD'))
-    console.log(dayjs().startOf('month').day())
+    // console.log(dayjs().startOf('month').format('YYYY-MM-DD'))
+    // console.log(dayjs().endOf('month').format('YYYY-MM-DD'))
+    // console.log(dayjs().startOf('month').add(1, 'week').format('YYYY-MM-DD'))
+    // console.log(dayjs().startOf('month').day())
 
-    console.log(this.daysLists)
-    console.log(this.month)
-    console.log(this.year)
+    // console.log(this.daysLists)
+    // console.log(this.month)
+    // console.log(this.year)
     this.getDateLists()
   },
   props: {
@@ -95,7 +116,21 @@ export default {
           label: dayjs(`${this.year}-${this.month}`)
             .startOf('month')
             .add(-i, 'day')
-            .format('D')
+            .format('D'),
+          isWorkday: isWorkday(
+            dayjs(`${this.year}-${this.month}`)
+              .startOf('month')
+              .add(-i, 'day')
+              .format('YYYY-MM-DD')
+          ),
+          cnDay: Lunar.fromDate(
+            new Date(
+              dayjs(`${this.year}-${this.month}`)
+                .startOf('month')
+                .add(-i, 'day')
+                .format('YYYY-MM-DD')
+            )
+          ).getDayInChinese()
         })
       }
       // 获取当月
@@ -110,7 +145,16 @@ export default {
           ),
           label: dayjs(this.year + '-' + this.month + '-' + i).format('D'),
           // 是当前的月的日期
-          isCurrentMonth: true
+          isCurrentMonth: true,
+          isWorkday: isWorkday(
+            dayjs(`${this.year}-${this.month}-${i}`).format('YYYY-MM-DD')
+          ),
+          isToday: dayjs(`${this.year}-${this.month}-${i}`).isToday(),
+          cnDay: Lunar.fromDate(
+            new Date(
+              dayjs(`${this.year}-${this.month}-${i}`).format('YYYY-MM-DD')
+            )
+          ).getDayInChinese()
         })
       }
 
@@ -125,7 +169,21 @@ export default {
           label: dayjs(`${this.year}-${this.month}`)
             .endOf('month')
             .add(i, 'day')
-            .format('D')
+            .format('D'),
+          isWorkday: isWorkday(
+            dayjs(`${this.year}-${this.month}`)
+              .endOf('month')
+              .add(i, 'day')
+              .format('YYYY-MM-DD')
+          ),
+          cnDay: Lunar.fromDate(
+            new Date(
+              dayjs(`${this.year}-${this.month}`)
+                .endOf('month')
+                .add(i, 'day')
+                .format('YYYY-MM-DD')
+            )
+          ).getDayInChinese()
         })
       }
       // dataList 分割成7组，每组7个
@@ -181,11 +239,11 @@ export default {
   .calendar-title {
     display: flex;
     justify-content: space-between;
-    height: 50px;
+    height: 80px;
     background-color: #d7d7d7;
     .calendar-title-day {
-      width: 50px;
-      line-height: 50px;
+      width: 100px;
+      line-height: 80px;
       text-align: center;
     }
   }
@@ -193,15 +251,33 @@ export default {
     .calendar-week {
       display: flex;
       justify-content: space-between;
-      height: 50px;
+      height: 80px;
       .calendar-day {
         color: #d7d7d7;
-        width: 50px;
-        line-height: 50px;
+        width: 100px;
+        line-height: 80px;
         text-align: center;
         cursor: pointer;
+        position: relative;
         &.current {
           color: #333;
+        }
+        &.today {
+          color: #fff;
+          background-color: red;
+        }
+        &-rest {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          line-height: 20px;
+          background-color: rgb(117, 117, 117);
+          color: #fff;
+          border-radius: 50%;
+          font-size: 12px;
+          top: 20px;
+        }
+        &-today {
         }
       }
     }
