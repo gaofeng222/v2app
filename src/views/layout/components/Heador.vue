@@ -7,6 +7,7 @@
       </div>
     </div>
     <div class="header-right">
+      <div class="sysTime">{{ sysTime }}</div>
       <el-avatar :src="avatarUrl"></el-avatar>
       <el-dropdown @command="handlerClick">
         <span class="el-dropdown-link">
@@ -23,11 +24,15 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import dayjs from "dayjs";
+let timer = null;
+const week = ["一", "二", "三", "四", "五", "六", "日"];
 export default {
   data() {
     return {
       avatarUrl:
         "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",
+      sysTime: "",
     };
   },
   computed: {
@@ -36,6 +41,13 @@ export default {
       console.log("🚀 ~ username ~ this.userInfo:", this.userInfo);
       return this.userInfo.name;
     },
+  },
+  created() {
+    // 初始化系统时间
+    this.formatTime();
+    this.$once("beforeDestroy", () => {
+      clearInterval(timer);
+    });
   },
   methods: {
     ...mapActions({
@@ -53,6 +65,17 @@ export default {
     },
     toggleHandler() {
       this.toggleSiderBar();
+    },
+    // 显示系统时间
+    formatTime() {
+      const time = dayjs().format("YYYY-MM-DD HH:mm:ss");
+      timer = setInterval(() => {
+        console.log(22222);
+        this.sysTime =
+          dayjs().format("YYYY-MM-DD HH:mm:ss") +
+          " 星期" +
+          week[dayjs().day() - 1];
+      }, 1000);
     },
   },
 };
@@ -77,6 +100,16 @@ export default {
   .header-right {
     display: flex;
     place-items: center;
+    .sysTime {
+      margin: auto 10px;
+      background-color: var(--color-primary);
+      border-radius: 30px;
+      height: 30px;
+      line-height: 30px;
+      color: #fff;
+      min-width: 240px;
+      text-align: center;
+    }
   }
 }
 </style>
