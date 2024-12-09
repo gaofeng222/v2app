@@ -70,7 +70,6 @@ export default {
     formatTime() {
       const time = dayjs().format("YYYY-MM-DD HH:mm:ss");
       timer = setInterval(() => {
-        console.log(22222);
         this.sysTime =
           dayjs().format("YYYY-MM-DD HH:mm:ss") +
           " 星期" +
